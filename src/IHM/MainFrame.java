@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package IHM;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
 
 /**
  *
@@ -31,6 +38,8 @@ public class MainFrame extends javax.swing.JFrame {
         panelType = new javax.swing.JPanel();
         labelType = new javax.swing.JLabel();
         listeType = new javax.swing.JComboBox();
+        JTextArea textTypesAjoutes = new JTextArea();
+        JTextArea textFiltresAjoutes = new JTextArea();
         boutonAjoutType = new javax.swing.JButton();
         panelFiltres = new javax.swing.JPanel();
         labelFiltres = new javax.swing.JLabel();
@@ -41,6 +50,25 @@ public class MainFrame extends javax.swing.JFrame {
         boutonRecherche = new javax.swing.JButton();
         panelFacet = new javax.swing.JPanel();
         panelResultats = new javax.swing.JPanel();
+        /*JScrollBar vbar = new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 300);
+        textArea.add(vbar);
+        vbar.setUnitIncrement(2);
+        vbar.setBlockIncrement(1);*/
+        boutonAjoutType.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		String temp = listeType.getSelectedItem().toString();
+        		textTypesAjoutes.append(temp+"\r\n");
+        	}
+        });
+        
+        boutonSuppressionFiltres.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		String temp = listeFiltres.getSelectedItem().toString();
+        		textFiltresAjoutes.append(temp+"\r\n");
+        	}
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -89,33 +117,37 @@ public class MainFrame extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         getContentPane().add(panelRecherche, gridBagConstraints);
+        
+        
 
         javax.swing.GroupLayout panelFacetLayout = new javax.swing.GroupLayout(panelFacet);
-        panelFacet.setLayout(panelFacetLayout);
         panelFacetLayout.setHorizontalGroup(
-            panelFacetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        	panelFacetLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(textTypesAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         panelFacetLayout.setVerticalGroup(
-            panelFacetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        	panelFacetLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(textTypesAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
+        panelFacet.setLayout(panelFacetLayout);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         getContentPane().add(panelFacet, gridBagConstraints);
+        
+        
 
         javax.swing.GroupLayout panelResultatsLayout = new javax.swing.GroupLayout(panelResultats);
-        panelResultats.setLayout(panelResultatsLayout);
         panelResultatsLayout.setHorizontalGroup(
-            panelResultatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        	panelResultatsLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(textFiltresAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         panelResultatsLayout.setVerticalGroup(
-            panelResultatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        	panelResultatsLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(textFiltresAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
+        panelResultats.setLayout(panelResultatsLayout);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -174,5 +206,4 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelRecherche;
     private javax.swing.JPanel panelResultats;
     private javax.swing.JPanel panelType;
-    // End of variables declaration//GEN-END:variables
 }
