@@ -38,8 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelType = new javax.swing.JPanel();
         labelType = new javax.swing.JLabel();
         listeType = new javax.swing.JComboBox();
-        JTextArea textTypesAjoutes = new JTextArea();
-        JTextArea textFiltresAjoutes = new JTextArea();
+
         boutonAjoutType = new javax.swing.JButton();
         panelFiltres = new javax.swing.JPanel();
         labelFiltres = new javax.swing.JLabel();
@@ -54,13 +53,10 @@ public class MainFrame extends javax.swing.JFrame {
         textArea.add(vbar);
         vbar.setUnitIncrement(2);
         vbar.setBlockIncrement(1);*/
-        boutonAjoutType.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		String temp = listeType.getSelectedItem().toString();
-        		textTypesAjoutes.append(temp+"\r\n");
-        	}
-        });
+
+        
+        /*JTextArea textTypesAjoutes = new JTextArea();
+        JTextArea textFiltresAjoutes = new JTextArea();
         
         boutonSuppressionFiltres.addMouseListener(new MouseAdapter() {
         	@Override
@@ -69,6 +65,14 @@ public class MainFrame extends javax.swing.JFrame {
         		textFiltresAjoutes.append(temp+"\r\n");
         	}
         });
+        
+        boutonAjoutType.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		String temp = listeType.getSelectedItem().toString();
+        		textTypesAjoutes.append(temp+"\r\n");
+        	}
+        });*/
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -121,14 +125,14 @@ public class MainFrame extends javax.swing.JFrame {
         
 
         javax.swing.GroupLayout panelFacetLayout = new javax.swing.GroupLayout(panelFacet);
-        panelFacetLayout.setHorizontalGroup(
+        /*panelFacetLayout.setHorizontalGroup(
         	panelFacetLayout.createParallelGroup(Alignment.LEADING)
         		.addComponent(textTypesAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         panelFacetLayout.setVerticalGroup(
         	panelFacetLayout.createParallelGroup(Alignment.LEADING)
         		.addComponent(textTypesAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
+        );*/
         panelFacet.setLayout(panelFacetLayout);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -139,14 +143,14 @@ public class MainFrame extends javax.swing.JFrame {
         
 
         javax.swing.GroupLayout panelResultatsLayout = new javax.swing.GroupLayout(panelResultats);
-        panelResultatsLayout.setHorizontalGroup(
+        /*panelResultatsLayout.setHorizontalGroup(
         	panelResultatsLayout.createParallelGroup(Alignment.LEADING)
         		.addComponent(textFiltresAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         panelResultatsLayout.setVerticalGroup(
         	panelResultatsLayout.createParallelGroup(Alignment.LEADING)
         		.addComponent(textFiltresAjoutes, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
+        );*/
         panelResultats.setLayout(panelResultatsLayout);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
