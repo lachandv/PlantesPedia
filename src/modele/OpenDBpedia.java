@@ -17,7 +17,7 @@ public class OpenDBpedia {
 		
 		HTTPRepository repo = new HTTPRepository("http://dbpedia.org/sparql","");
 		RepositoryConnection connection = repo.getConnection();
-		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, "select distinct ?Res where {?x a ?y . ?y rdfs:label 'apple' } LIMIT 10");
+		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, "select distinct ?Res where {<http://fr.dbpedia.org/resource/Plante> ?x ?Res } LIMIT 10");
 		TupleQueryResult result = query.evaluate();
 		while(result.hasNext()){
 			BindingSet binSet = result.next();
