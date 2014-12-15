@@ -44,11 +44,11 @@ public class OpenDBpedia {
 }	
 	
 public static String Region(String region){
-    return ". ?ville <http://dbpedia.org/ontology/region> <http://dbpedia.org/resource/"+region+"/>";
+    return ". ?ville <http://dbpedia.org/ontology/region> <http://dbpedia.org/resource/"+region+">";
 }
 
 public static String Departement(String departement){
-    return ". ?ville <http://dbpedia.org/ontology/department> <http://dbpedia.org/resource/"+departement+"/>";
+    return ". ?ville <http://dbpedia.org/ontology/department> <http://dbpedia.org/resource/"+departement+">";
 }
 public static String Code_postal(int CP){
     return ". ?ville <http://dbpedia.org/ontology/postalCode> ?CP . FILTER(?CP ="+Integer.toString(CP)+")";
