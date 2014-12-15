@@ -24,16 +24,29 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 
 public class FramePlantesPedia extends JFrame {
 	
 	List<String> tabType = new ArrayList<String>();
-	JTextArea textArea_1 = new JTextArea();
 	boolean trouve = false;
 	boolean suppr = false;
-	JComboBox comboBox = new JComboBox<String>();
-	JComboBox comboBox_1 = new JComboBox<String>();
+	
+	JComboBox comboBoxTypeAjout = new JComboBox<String>();
+	JComboBox comboBoxTypeSupprime = new JComboBox<String>();
+	private static JTextField textFieldHabitantsMin;
+	private static JTextField textFieldHabitantsMax;
+	private static JTextField textFieldCodePostal;
+	private static JTextField textFieldSuperficieMin;
+	private static JTextField textFieldSuperficieMax;
+	JComboBox<String> comboBoxRegions = new JComboBox<String>();
+	static JLabel lblDepartement = new JLabel("  Departement");
+	static JLabel lblHabitants = new JLabel("< Nombre d'habitants <");
+	static JLabel lblCodePostal = new JLabel("Code Postal");
+	static JLabel lblSuperficie = new JLabel("< superficie (km\u00B2) <");
+	private JTextField textFieldDep;
+	private JTextField textFieldDepartement;
 	
 
 	
@@ -97,93 +110,263 @@ public class FramePlantesPedia extends JFrame {
 		gbc_lblNewLabel.gridy = 1;
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 4;
-		panel.add(scrollPane, gbc_scrollPane);
+		
+		GridBagConstraints gbc_comboBoxTypeAjout = new GridBagConstraints();
+		gbc_comboBoxTypeAjout.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxTypeAjout.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxTypeAjout.gridx = 0;
+		gbc_comboBoxTypeAjout.gridy = 2;
+		comboBoxTypeAjout.addItem("Nom");
+		comboBoxTypeAjout.addItem("Region");
+		comboBoxTypeAjout.addItem("Nombre d'habitants");
+		comboBoxTypeAjout.addItem("Code Postal");
+		comboBoxTypeAjout.addItem("Superficie");
+		panel.add(comboBoxTypeAjout, gbc_comboBoxTypeAjout);
 		
 		
-		textArea_1.setEditable(false);
-		scrollPane.setViewportView(textArea_1);
+		GridBagConstraints gbc_comboBoxTypeSupprime = new GridBagConstraints();
+		gbc_comboBoxTypeSupprime.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxTypeSupprime.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxTypeSupprime.gridx = 2;
+		gbc_comboBoxTypeSupprime.gridy = 2;
+		panel.add(comboBoxTypeSupprime, gbc_comboBoxTypeSupprime);
 		
-		
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 0;
-		gbc_comboBox.gridy = 2;
-		comboBox.addItem("Nom");
-		comboBox.addItem("Region");
-		comboBox.addItem("Nombre d'habitants");
-		comboBox.addItem("Code Postal");
-		comboBox.addItem("Superficie");
-		panel.add(comboBox, gbc_comboBox);
-		
-		
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 2;
-		gbc_comboBox_1.gridy = 2;
-		panel.add(comboBox_1, gbc_comboBox_1);
-		
-		JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnAjout = new JButton("Ajouter");
+		btnAjout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String temp = comboBox.getSelectedItem().toString();
+				String temp = comboBoxTypeAjout.getSelectedItem().toString();
 				//tabType.add(temp);
 				afficherTableau(tabType);
 				verifierDoublon(tabType, temp);
 				if(trouve == false) {
-					textArea_1.setText("");
 					tabType.add(temp);
 					//mettreTypeDansTextArea(temp);
-					afficherTableauDansTextArea(tabType);
+					//afficherTableauDansTextArea(tabType);
 					mettreTypeDansComboBox(temp);
-					comboBox_1.setSelectedItem(null);
+					comboBoxTypeSupprime.setSelectedItem(null);
 				} else {
 					JOptionPane jop3 = new JOptionPane();
 					jop3.showMessageDialog(null, "Impossible d'ajouter un type déjà existant", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
+				switch (temp) {
+				case "Nom":
+					lblDepartement.setEnabled(true);
+					textFieldDepartement.setEnabled(true);
+					break;
+				case "Region":
+					comboBoxRegions.setEnabled(true);
+					break;
+				case "Nombre d'habitants":
+					textFieldHabitantsMax.setEnabled(true);
+					textFieldHabitantsMin.setEnabled(true);
+					lblHabitants.setEnabled(true);
+					break;
+				case "Code Postal":
+					lblCodePostal.setEnabled(true);
+					textFieldCodePostal.setEnabled(true);
+					break;
+				case "Superficie":
+					lblSuperficie.setEnabled(true);
+					textFieldSuperficieMax.setEnabled(true);
+					textFieldSuperficieMin.setEnabled(true);
+					break;
+				}
 				//textArea_1.append(temp+"\r\n");
 			}
 		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 3;
-		panel.add(btnNewButton, gbc_btnNewButton);
+		GridBagConstraints gbc_btnAjout = new GridBagConstraints();
+		gbc_btnAjout.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnAjout.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAjout.gridx = 0;
+		gbc_btnAjout.gridy = 3;
+		panel.add(btnAjout, gbc_btnAjout);
 		
-		JButton btnNewButton_2 = new JButton("Supprimer");
-		btnNewButton_2.addMouseListener(new MouseAdapter() {
+		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String temp = comboBox_1.getSelectedItem().toString();
+				String temp = comboBoxTypeSupprime.getSelectedItem().toString();
 				suppr = verifierExiste(temp);
 				if (suppr == true) {
 					supprimerTypeDuTableau(temp);
-					comboBox_1.removeItem(temp);
-					comboBox_1.setSelectedItem(null);
+					comboBoxTypeSupprime.removeItem(temp);
+					comboBoxTypeSupprime.setSelectedItem(null);
 				} else {
 					JOptionPane jop3 = new JOptionPane();
 					jop3.showMessageDialog(null, "Impossible de supprimer un type non existant", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
+				switch (temp) {
+				case "Nom":
+					lblDepartement.setEnabled(false);
+					textFieldDepartement.setEnabled(false);
+					break;
+				case "Region":
+					comboBoxRegions.setEnabled(false);
+					break;
+				case "Nombre d'habitants":
+					textFieldHabitantsMax.setEnabled(false);
+					textFieldHabitantsMin.setEnabled(false);
+					lblHabitants.setEnabled(false);
+					break;
+				case "Code Postal":
+					lblCodePostal.setEnabled(false);
+					textFieldCodePostal.setEnabled(false);
+					break;
+				case "Superficie":
+					lblSuperficie.setEnabled(false);
+					textFieldSuperficieMax.setEnabled(false);
+					textFieldSuperficieMin.setEnabled(false);
+					break;
+				}
 				
 			}
 		});
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_2.gridx = 2;
-		gbc_btnNewButton_2.gridy = 3;
-		panel.add(btnNewButton_2, gbc_btnNewButton_2);
+		GridBagConstraints gbc_btnSupprimer = new GridBagConstraints();
+		gbc_btnSupprimer.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSupprimer.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnSupprimer.gridx = 2;
+		gbc_btnSupprimer.gridy = 3;
+		panel.add(btnSupprimer, gbc_btnSupprimer);
+		
+		JPanel panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.gridwidth = 3;
+		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 4;
+		panel.add(panel_1, gbc_panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_panel_1.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
+		
+		GridBagConstraints gbc_comboBoxRegions = new GridBagConstraints();
+		gbc_comboBoxRegions.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxRegions.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxRegions.gridx = 1;
+		gbc_comboBoxRegions.gridy = 0;
+		comboBoxRegions.setEnabled(false);
+		comboBoxRegions.addItem("Alsace");
+		comboBoxRegions.addItem("Aquitaine");
+		comboBoxRegions.addItem("Auvergne");
+		comboBoxRegions.addItem("Basse-Normandie");
+		comboBoxRegions.addItem("Bourgogne");
+		comboBoxRegions.addItem("Bretagne");
+		comboBoxRegions.addItem("Centre");
+		comboBoxRegions.addItem("Champagne-Ardenne");
+		comboBoxRegions.addItem("Corse");
+		comboBoxRegions.addItem("Franche-Comté");
+		comboBoxRegions.addItem("Haute-Normandie");
+		comboBoxRegions.addItem("Île-De-France");
+		comboBoxRegions.addItem("Languedoc-Roussillon");
+		comboBoxRegions.addItem("Limousin");
+		comboBoxRegions.addItem("Lorraine");
+		comboBoxRegions.addItem("Midi-Pyrénées");
+		comboBoxRegions.addItem("Nord-Pas-De-Calais");
+		comboBoxRegions.addItem("Pays-De-La-Loire");
+		comboBoxRegions.addItem("Picardie");
+		comboBoxRegions.addItem("Poitou-Charentes");
+		comboBoxRegions.addItem("Provence-Alpes-Côte_d'Azur");
+		comboBoxRegions.addItem("Rhônes-Alpes");
+		panel_1.add(comboBoxRegions, gbc_comboBoxRegions);
+		
+		
+		GridBagConstraints gbc_lblDepartement = new GridBagConstraints();
+		gbc_lblDepartement.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDepartement.anchor = GridBagConstraints.EAST;
+		gbc_lblDepartement.gridx = 0;
+		gbc_lblDepartement.gridy = 1;
+		lblDepartement.setEnabled(false);
+		panel_1.add(lblDepartement, gbc_lblDepartement);
+		
+		textFieldDepartement = new JTextField();
+		textFieldDepartement.setEnabled(false);
+		GridBagConstraints gbc_textFieldDepartement = new GridBagConstraints();
+		gbc_textFieldDepartement.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldDepartement.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDepartement.gridx = 1;
+		gbc_textFieldDepartement.gridy = 1;
+		panel_1.add(textFieldDepartement, gbc_textFieldDepartement);
+		textFieldDepartement.setColumns(10);
+		
+		textFieldHabitantsMin = new JTextField();
+		textFieldHabitantsMin.setEnabled(false);
+		GridBagConstraints gbc_textFieldHabitantsMin = new GridBagConstraints();
+		gbc_textFieldHabitantsMin.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldHabitantsMin.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldHabitantsMin.gridx = 0;
+		gbc_textFieldHabitantsMin.gridy = 2;
+		panel_1.add(textFieldHabitantsMin, gbc_textFieldHabitantsMin);
+		textFieldHabitantsMin.setColumns(10);
+		
+		
+		GridBagConstraints gbc_lblHabitants = new GridBagConstraints();
+		gbc_lblHabitants.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHabitants.gridx = 1;
+		gbc_lblHabitants.gridy = 2;
+		lblHabitants.setEnabled(false);
+		panel_1.add(lblHabitants, gbc_lblHabitants);
+		
+		textFieldHabitantsMax = new JTextField();
+		textFieldHabitantsMax.setEnabled(false);
+		GridBagConstraints gbc_textFieldHabitantsMax = new GridBagConstraints();
+		gbc_textFieldHabitantsMax.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldHabitantsMax.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldHabitantsMax.gridx = 2;
+		gbc_textFieldHabitantsMax.gridy = 2;
+		panel_1.add(textFieldHabitantsMax, gbc_textFieldHabitantsMax);
+		textFieldHabitantsMax.setColumns(10);
+		
+		
+		GridBagConstraints gbc_lblCodePostal = new GridBagConstraints();
+		gbc_lblCodePostal.anchor = GridBagConstraints.EAST;
+		gbc_lblCodePostal.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCodePostal.gridx = 0;
+		gbc_lblCodePostal.gridy = 3;
+		lblCodePostal.setEnabled(false);
+		panel_1.add(lblCodePostal, gbc_lblCodePostal);
+		
+		textFieldCodePostal = new JTextField();
+		textFieldCodePostal.setEnabled(false);
+		GridBagConstraints gbc_textFieldCodePostal = new GridBagConstraints();
+		gbc_textFieldCodePostal.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldCodePostal.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldCodePostal.gridx = 1;
+		gbc_textFieldCodePostal.gridy = 3;
+		panel_1.add(textFieldCodePostal, gbc_textFieldCodePostal);
+		textFieldCodePostal.setColumns(10);
+		
+		textFieldSuperficieMin = new JTextField();
+		textFieldSuperficieMin.setEnabled(false);
+		GridBagConstraints gbc_textFieldSuperficieMin = new GridBagConstraints();
+		gbc_textFieldSuperficieMin.insets = new Insets(0, 0, 0, 5);
+		gbc_textFieldSuperficieMin.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldSuperficieMin.gridx = 0;
+		gbc_textFieldSuperficieMin.gridy = 4;
+		panel_1.add(textFieldSuperficieMin, gbc_textFieldSuperficieMin);
+		textFieldSuperficieMin.setColumns(10);
+		
+		
+		GridBagConstraints gbc_lblSuperficie = new GridBagConstraints();
+		gbc_lblSuperficie.insets = new Insets(0, 0, 0, 5);
+		gbc_lblSuperficie.gridx = 1;
+		gbc_lblSuperficie.gridy = 4;
+		lblSuperficie.setEnabled(false);
+		panel_1.add(lblSuperficie, gbc_lblSuperficie);
+		
+		textFieldSuperficieMax = new JTextField();
+		textFieldSuperficieMax.setEnabled(false);
+		GridBagConstraints gbc_textFieldSuperficieMax = new GridBagConstraints();
+		gbc_textFieldSuperficieMax.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldSuperficieMax.gridx = 2;
+		gbc_textFieldSuperficieMax.gridy = 4;
+		panel_1.add(textFieldSuperficieMax, gbc_textFieldSuperficieMax);
+		textFieldSuperficieMax.setColumns(10);
 		
 
 	}
@@ -213,11 +396,11 @@ public class FramePlantesPedia extends JFrame {
 		
 	}
 	
-	public void afficherTableauDansTextArea(List<String> tab) {
+	/*public void afficherTableauDansTextArea(List<String> tab) {
 		for (int i=0; i<tab.size();i++) {
 			textArea_1.append(tab.get(i)+"\r\n");
 		}
-	}
+	}*/
 	
 	public void afficherTableau(List<String> tab) {
 		System.out.println("Tableau :");
@@ -230,8 +413,7 @@ public class FramePlantesPedia extends JFrame {
 		for (int i=0; i<tabType.size();i++) {
 			if (tabType.get(i).equals(temp)) {
 				tabType.remove(i);
-				textArea_1.setText("");
-				afficherTableauDansTextArea(tabType);
+				//afficherTableauDansTextArea(tabType);
 				suppr = true;
 				break;
 			}
@@ -240,7 +422,7 @@ public class FramePlantesPedia extends JFrame {
 		}
 	
 	public void mettreTypeDansComboBox(String temp) {
-		comboBox_1.addItem(temp);
+		comboBoxTypeSupprime.addItem(temp);
 	}
 	
 	public boolean verifierExiste(String temp) {
@@ -250,8 +432,22 @@ public class FramePlantesPedia extends JFrame {
 			return false;
 		}
 	
+	/*public static void griserFiltres() {
+		lblCodePostal.setEnabled(false);
+		lblDepartement.setEnabled(false);
+		lblHabitants.setEnabled(false);
+		lblSuperficie.setEnabled(false);
+		textFieldCodePostal.setEnabled(false);
+		textFieldDepartement.setEnabled(false);
+		textFieldHabitantsMax.setEnabled(false);
+		textFieldHabitantsMin.setEnabled(false);
+		textFieldSuperficieMax.setEnabled(false);
+		textFieldSuperficieMin.setEnabled(false);
+	}*/
+	
 	public static void main(String args[]) {
-
+			//griserFiltres();
             new FramePlantesPedia().setVisible(true);
+            
         }
 	}
