@@ -21,7 +21,7 @@ public class OpenDBpedia {
     
     if (dpt != null) req=req+Departement(dpt);
     
-    if (postCode != null) req=req+Code_postal(Integer.parseInt(postCode));
+    if (postCode != null) req=req+Code_postal(postCode);
     
     if (nb_hab_min == null) hab_min = 0;
     else hab_min = Integer.parseInt(nb_hab_min);
@@ -39,7 +39,7 @@ public class OpenDBpedia {
     req = req+Superficie(super_min, super_max);
     req = req+"} LIMIT 10";
         
-    System.out.println(req);
+    System.out.println(postCode);
     return req;
 }	
 	
@@ -50,8 +50,8 @@ public static String Region(String region){
 public static String Departement(String departement){
     return ". ?ville <http://dbpedia.org/ontology/department> <http://dbpedia.org/resource/"+departement+">";
 }
-public static String Code_postal(int CP){
-    return ". ?ville <http://dbpedia.org/ontology/postalCode> ?CP . FILTER(?CP ="+Integer.toString(CP)+")";
+public static String Code_postal(String CP){
+    return ". ?ville <http://dbpedia.org/ontology/postalCode> ?CP. FILTER(str(?CP) ='"+CP+"')";
 }
 
 public static String Population(int min, int max){
