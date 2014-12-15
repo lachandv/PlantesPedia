@@ -17,7 +17,7 @@ public class OpenDBpedia {
 		
 		HTTPRepository repo = new HTTPRepository("http://dbpedia.org/sparql","");
 		RepositoryConnection connection = repo.getConnection();
-		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, "select distinct ?Res where {<http://dbpedia.org/resource/Lyon> ?y ?Res} LIMIT 10");
+		TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, "select distinct ?Res where {?Res <http://dbpedia.org/ontology/region> <http://dbpedia.org/resource/Rhône-Alpes>} LIMIT 10");
 		TupleQueryResult result = query.evaluate();
 		while(result.hasNext()){
 			BindingSet binSet = result.next();
