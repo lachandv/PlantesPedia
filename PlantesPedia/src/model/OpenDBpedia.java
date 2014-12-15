@@ -55,11 +55,11 @@ public static String Code_postal(int CP){
 }
 
 public static String Population(int min, int max){
-    return ". ?ville <http://dbpedia.org/ontology/populationTotal> ?POP ";
+    return ". ?ville <http://dbpedia.org/ontology/populationTotal> ?POP . FILTER(?POP >"+Integer.toString(min)+") .FILTER(?POP <"+Integer.toString(max)+")";
 }
 
 public static String Superficie(int min, int max){
-    return ". ?ville <http://dbpedia.org/ontology/area> ?SUP . FILTER(?SUP >0) .FILTER(?SUP <1000000000000)";
+    return ". ?ville <http://dbpedia.org/ontology/area> ?SUP . FILTER(?SUP >"+Integer.toString(min)+") .FILTER(?SUP <"+Integer.toString(max)+")";
 }
 	
 	public static void main(String[] args) throws RepositoryException,MalformedQueryException , QueryEvaluationException{
