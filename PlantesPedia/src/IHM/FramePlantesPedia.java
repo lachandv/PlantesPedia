@@ -116,8 +116,8 @@ public class FramePlantesPedia extends JFrame {
 		gbc_comboBoxTypeAjout.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxTypeAjout.gridx = 0;
 		gbc_comboBoxTypeAjout.gridy = 2;
-		comboBoxTypeAjout.addItem("Nom");
 		comboBoxTypeAjout.addItem("Region");
+		comboBoxTypeAjout.addItem("Departement");
 		comboBoxTypeAjout.addItem("Nombre d'habitants");
 		comboBoxTypeAjout.addItem("Code Postal");
 		comboBoxTypeAjout.addItem("Superficie");
@@ -150,7 +150,7 @@ public class FramePlantesPedia extends JFrame {
 					jop3.showMessageDialog(null, "Impossible d'ajouter un type déjà existant", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				switch (temp) {
-				case "Nom":
+				case "Departement":
 					lblDepartement.setEnabled(true);
 					textFieldDepartement.setEnabled(true);
 					break;
@@ -197,7 +197,7 @@ public class FramePlantesPedia extends JFrame {
 					jop3.showMessageDialog(null, "Impossible de supprimer un type non existant", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				switch (temp) {
-				case "Nom":
+				case "Departement":
 					lblDepartement.setEnabled(false);
 					textFieldDepartement.setEnabled(false);
 					break;
@@ -272,7 +272,7 @@ public class FramePlantesPedia extends JFrame {
 		comboBoxRegions.addItem("Picardie");
 		comboBoxRegions.addItem("Poitou-Charentes");
 		comboBoxRegions.addItem("Provence-Alpes-Côte_d'Azur");
-		comboBoxRegions.addItem("Rhônes-Alpes");
+		comboBoxRegions.addItem("Rh%C3%B4ne-Alpes");
 		panel_1.add(comboBoxRegions, gbc_comboBoxRegions);
 		
 		
