@@ -48,8 +48,6 @@ public class FramePlantesPedia extends JFrame {
 	private JTextField textFieldDep;
 	private JTextField textFieldDepartement;
 	
-
-	
 	public FramePlantesPedia() {
 		this.setSize(500, 300);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -362,25 +360,20 @@ public class FramePlantesPedia extends JFrame {
 		gbc_textFieldSuperficieMax.gridy = 4;
 		panel_1.add(textFieldSuperficieMax, gbc_textFieldSuperficieMax);
 		textFieldSuperficieMax.setColumns(10);
-		
-
 	}
-	
-	
+
 	public void verifierDoublon(List<String> tab, String valeur) {
 		if  (tab.isEmpty() == false) {
-		for (int i=0; i<tab.size();i++) {
-			if (tabType.get(i).equals(valeur)) {
-				System.out.println("Doublon");
-				trouve = true;
-				break;
-			}
+			for (int i=0; i<tab.size();i++) {
+				if (tabType.get(i).equals(valeur)) {
+					System.out.println("Doublon");
+					trouve = true;
+					break;
+				}
 			trouve = false;
+			}
 		}
-		}
-		
 	}
-	
 	
 	public void afficherTableau(List<String> tab) {
 		System.out.println("Tableau :");
@@ -397,23 +390,22 @@ public class FramePlantesPedia extends JFrame {
 				break;
 			}
 			suppr = false;
-			}
 		}
+	}
 	
 	public void mettreTypeDansComboBox(String temp) {
 		comboBoxTypeSupprime.addItem(temp);
 	}
 	
 	public boolean verifierExiste(String temp) {
-			if (tabType.contains(temp)) {
-				return true;
-			}
-			return false;
+		if (tabType.contains(temp)) {
+			return true;
 		}
+		return false;
+	}
 	
 	
 	public static void main(String args[]) {
-            new FramePlantesPedia().setVisible(true);
-            
+            new FramePlantesPedia().setVisible(true);    
         }
 	}
