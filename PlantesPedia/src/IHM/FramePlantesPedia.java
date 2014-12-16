@@ -136,13 +136,9 @@ public class FramePlantesPedia extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String temp = comboBoxTypeAjout.getSelectedItem().toString();
-				//tabType.add(temp);
-				afficherTableau(tabType);
 				verifierDoublon(tabType, temp);
 				if(trouve == false) {
 					tabType.add(temp);
-					//mettreTypeDansTextArea(temp);
-					//afficherTableauDansTextArea(tabType);
 					mettreTypeDansComboBox(temp);
 					comboBoxTypeSupprime.setSelectedItem(null);
 				} else {
@@ -172,7 +168,6 @@ public class FramePlantesPedia extends JFrame {
 					textFieldSuperficieMin.setEnabled(true);
 					break;
 				}
-				//textArea_1.append(temp+"\r\n");
 			}
 		});
 		GridBagConstraints gbc_btnAjout = new GridBagConstraints();
@@ -371,21 +366,11 @@ public class FramePlantesPedia extends JFrame {
 
 	}
 	
-	/*public void mettreTypeDansTextArea(String temp) {
-		for (int i=0; i<tabType.size();i++) {
-			System.out.println("indice : "+i);
-			//String tempType = comboBox.getSelectedItem().toString();
-			textArea_1.append(temp+"\r\n");
-		}
-	}*/
 	
 	public void verifierDoublon(List<String> tab, String valeur) {
-		//trouve = false;
 		if  (tab.isEmpty() == false) {
 		for (int i=0; i<tab.size();i++) {
-			//System.out.println("Valeur ajout : "+tabType.get(i));
 			if (tabType.get(i).equals(valeur)) {
-				//System.out.println(tabType.get(i).toString());
 				System.out.println("Doublon");
 				trouve = true;
 				break;
@@ -396,11 +381,6 @@ public class FramePlantesPedia extends JFrame {
 		
 	}
 	
-	/*public void afficherTableauDansTextArea(List<String> tab) {
-		for (int i=0; i<tab.size();i++) {
-			textArea_1.append(tab.get(i)+"\r\n");
-		}
-	}*/
 	
 	public void afficherTableau(List<String> tab) {
 		System.out.println("Tableau :");
@@ -413,7 +393,6 @@ public class FramePlantesPedia extends JFrame {
 		for (int i=0; i<tabType.size();i++) {
 			if (tabType.get(i).equals(temp)) {
 				tabType.remove(i);
-				//afficherTableauDansTextArea(tabType);
 				suppr = true;
 				break;
 			}
@@ -432,21 +411,8 @@ public class FramePlantesPedia extends JFrame {
 			return false;
 		}
 	
-	/*public static void griserFiltres() {
-		lblCodePostal.setEnabled(false);
-		lblDepartement.setEnabled(false);
-		lblHabitants.setEnabled(false);
-		lblSuperficie.setEnabled(false);
-		textFieldCodePostal.setEnabled(false);
-		textFieldDepartement.setEnabled(false);
-		textFieldHabitantsMax.setEnabled(false);
-		textFieldHabitantsMin.setEnabled(false);
-		textFieldSuperficieMax.setEnabled(false);
-		textFieldSuperficieMin.setEnabled(false);
-	}*/
 	
 	public static void main(String args[]) {
-			//griserFiltres();
             new FramePlantesPedia().setVisible(true);
             
         }
