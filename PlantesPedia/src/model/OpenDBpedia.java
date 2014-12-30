@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
@@ -60,6 +61,22 @@ public static String Population(int min, int max){
 
 public static String Superficie(int min, int max){
     return ". ?ville <http://dbpedia.org/ontology/area> ?SUP . FILTER(?SUP >"+Integer.toString(min)+") .FILTER(?SUP <"+Integer.toString(max)+")";
+}
+
+public static ArrayList<String> getVilles(String requete)throws RepositoryException,MalformedQueryException , QueryEvaluationException{
+    
+    ArrayList<String> sortie = new ArrayList<String>();
+    
+    HTTPRepository repo = new HTTPRepository("http://dbpedia.org/sparql","");
+    RepositoryConnection connection = repo.getConnection();
+    TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, requete);
+    TupleQueryResult result = query.evaluate();
+    while(result.hasNext()){
+	BindingSet binSet = result.next();
+	sortie.add(binSet.getValue("ville").toString());
+    }
+    
+    return sortie;
 }
 	
 	public static void main(String[] args) throws RepositoryException,MalformedQueryException , QueryEvaluationException{

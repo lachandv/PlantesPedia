@@ -24,7 +24,13 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.repository.RepositoryException;
 
 
 public class FramePlantesPedia extends JFrame {
@@ -87,6 +93,54 @@ public class FramePlantesPedia extends JFrame {
 		panel.add(txtrTapezVotreRecherche, gbc_txtrTapezVotreRecherche);
 		
 		JButton btnNewButton_1 = new JButton("Rechercher");
+                btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			String nom = null;
+                        String region = null;
+                        String dep = null;
+                        String cp = null;
+                        String hab_min = null;
+                        String hab_max = null;
+                        String sup_min = null;
+                        String sup_max = null;
+
+                        if (comboBoxRegions.isEnabled()){
+                            region = (String) comboBoxRegions.getSelectedItem();
+                        }
+                        if (textFieldCodePostal.isEnabled()){
+                            cp = (String) textFieldCodePostal.getText();
+                        }
+                        if (textFieldHabitantsMin.isEnabled()){
+                            hab_min = (String) textFieldHabitantsMin.getText();
+                        }
+                        if (textFieldHabitantsMax.isEnabled()){
+                            hab_max = (String) textFieldHabitantsMax.getText();
+                        }
+                        if (textFieldSuperficieMin.isEnabled()){
+                            sup_min = (String) textFieldSuperficieMin.getText();
+                        }
+                        if (textFieldSuperficieMax.isEnabled()){
+                            sup_max = (String) textFieldSuperficieMax.getText();
+                        }
+			String requete = model.OpenDBpedia.getRequete(null, region, null, cp, hab_min, hab_max, sup_min,sup_max);
+                        ArrayList<String> tabVille = new ArrayList<String>();
+                        try {
+                                tabVille = model.OpenDBpedia.getVilles(requete);
+                            } catch (RepositoryException ex) {
+                                Logger.getLogger(FramePlantesPedia.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (MalformedQueryException ex) {
+                                Logger.getLogger(FramePlantesPedia.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (QueryEvaluationException ex) {
+                                Logger.getLogger(FramePlantesPedia.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        Iterator it = tabVille.iterator();
+                        while(it.hasNext()){
+                            System.out.println("Ville : " + it.next().toString());
+                        }
+                        
+                    }
+		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
@@ -94,14 +148,14 @@ public class FramePlantesPedia extends JFrame {
 		gbc_btnNewButton_1.gridy = 0;
 		panel.add(btnNewButton_1, gbc_btnNewButton_1);
 		
-		JLabel label = new JLabel("New label");
+		JLabel label = new JLabel("Ajout de filtre");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.insets = new Insets(0, 0, 5, 5);
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 1;
 		panel.add(label, gbc_label);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("Supression de filtre");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 2;
@@ -141,7 +195,7 @@ public class FramePlantesPedia extends JFrame {
 					comboBoxTypeSupprime.setSelectedItem(null);
 				} else {
 					JOptionPane jop3 = new JOptionPane();
-					jop3.showMessageDialog(null, "Impossible d'ajouter un type déjà existant", "Erreur", JOptionPane.ERROR_MESSAGE);
+					jop3.showMessageDialog(null, "Impossible d'ajouter un type dï¿½jï¿½ existant", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				switch (temp) {
 				case "Departement":
@@ -253,18 +307,18 @@ public class FramePlantesPedia extends JFrame {
 		comboBoxRegions.addItem("Centre");
 		comboBoxRegions.addItem("Champagne-Ardenne");
 		comboBoxRegions.addItem("Corse");
-		comboBoxRegions.addItem("Franche-Comté");
+		comboBoxRegions.addItem("Franche-Comtï¿½");
 		comboBoxRegions.addItem("Haute-Normandie");
-		comboBoxRegions.addItem("Île-De-France");
+		comboBoxRegions.addItem("ï¿½le-De-France");
 		comboBoxRegions.addItem("Languedoc-Roussillon");
 		comboBoxRegions.addItem("Limousin");
 		comboBoxRegions.addItem("Lorraine");
-		comboBoxRegions.addItem("Midi-Pyrénées");
+		comboBoxRegions.addItem("Midi-Pyrï¿½nï¿½es");
 		comboBoxRegions.addItem("Nord-Pas-De-Calais");
 		comboBoxRegions.addItem("Pays-De-La-Loire");
 		comboBoxRegions.addItem("Picardie");
 		comboBoxRegions.addItem("Poitou-Charentes");
-		comboBoxRegions.addItem("Provence-Alpes-Côte_d'Azur");
+		comboBoxRegions.addItem("Provence-Alpes-Cï¿½te_d'Azur");
 		comboBoxRegions.addItem("Rh%C3%B4ne-Alpes");
 		panel_1.add(comboBoxRegions, gbc_comboBoxRegions);
 		
