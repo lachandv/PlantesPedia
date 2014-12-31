@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.repository.RepositoryException;
@@ -53,9 +54,13 @@ public class FramePlantesPedia extends JFrame {
 	static JLabel lblSuperficie = new JLabel("< superficie (km\u00B2) <");
 	private JTextField textFieldDep;
 	private JTextField textFieldDepartement;
+        static JLabel lblReponses = new JLabel("Villes correspondantes :");
+        String[] columnNames = {"Nom de la ville"};
+        JTextArea areaReponse = new JTextArea(40, 10);
+        
 	
 	public FramePlantesPedia() {
-		this.setSize(500, 300);
+		this.setSize(500, 500);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -104,7 +109,10 @@ public class FramePlantesPedia extends JFrame {
                         String hab_max = null;
                         String sup_min = null;
                         String sup_max = null;
-
+                        if (!txtrTapezVotreRecherche.getText().equals("Tapez votre recherche...") &
+                                !txtrTapezVotreRecherche.getText().equals("")){
+                            nom = (String) txtrTapezVotreRecherche.getText();
+                        }
                         if (comboBoxRegions.isEnabled()){
                             region = (String) comboBoxRegions.getSelectedItem();
                         }
@@ -135,8 +143,10 @@ public class FramePlantesPedia extends JFrame {
                                 Logger.getLogger(FramePlantesPedia.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         Iterator it = tabVille.iterator();
+                        String tmp = "";
+                        areaReponse.setText("");
                         while(it.hasNext()){
-                            System.out.println("Ville : " + it.next().toString());
+                            areaReponse.append(it.next().toString() + "\n");
                         }
                         
                     }
@@ -414,6 +424,21 @@ public class FramePlantesPedia extends JFrame {
 		gbc_textFieldSuperficieMax.gridy = 4;
 		panel_1.add(textFieldSuperficieMax, gbc_textFieldSuperficieMax);
 		textFieldSuperficieMax.setColumns(10);
+                
+                GridBagConstraints gbc_lblReponse = new GridBagConstraints();
+		gbc_lblReponse.insets = new Insets(0, 0, 0, 5);
+		gbc_lblReponse.gridx = 1;
+		gbc_lblReponse.gridy = 5;
+		lblReponses.setEnabled(false);
+		panel_1.add(lblReponses, gbc_lblReponse);
+                
+                GridBagConstraints gbc_tabReponse = new GridBagConstraints();
+		gbc_tabReponse.insets = new Insets(0, 0, 0, 5);
+		gbc_tabReponse.gridx = 1;
+		gbc_tabReponse.gridy = 6;
+		areaReponse.setEnabled(false);
+                panel_1.add(areaReponse, gbc_tabReponse);
+                
 	}
 
 	public void verifierDoublon(List<String> tab, String valeur) {

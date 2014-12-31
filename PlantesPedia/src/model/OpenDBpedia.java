@@ -73,7 +73,7 @@ public static ArrayList<String> getVilles(String requete)throws RepositoryExcept
     TupleQueryResult result = query.evaluate();
     while(result.hasNext()){
 	BindingSet binSet = result.next();
-	sortie.add(binSet.getValue("ville").toString());
+        sortie.add(binSet.toString());
     }
     
     return sortie;
