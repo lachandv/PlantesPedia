@@ -59,7 +59,7 @@ public class FramePlantesPedia extends JFrame {
         
 	
 	public FramePlantesPedia() {
-		this.setSize(500, 500);
+		this.setSize(630, 500);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -297,7 +297,7 @@ public class FramePlantesPedia extends JFrame {
 		gbc_panel_1.gridy = 4;
 		panel.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panel_1.columnWidths = new int[]{222, 298, 199, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panel_1.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -312,25 +312,25 @@ public class FramePlantesPedia extends JFrame {
 		comboBoxRegions.setEnabled(false);
 		comboBoxRegions.addItem("Alsace");
 		comboBoxRegions.addItem("Aquitaine");
-		comboBoxRegions.addItem("Auvergne");
-		comboBoxRegions.addItem("Basse-Normandie");
-		comboBoxRegions.addItem("Bourgogne");
+		comboBoxRegions.addItem("Auvergne_(region)");
+		comboBoxRegions.addItem("Lower_Normandy");
+		comboBoxRegions.addItem("Burgundy");
 		comboBoxRegions.addItem("Bretagne");
-		comboBoxRegions.addItem("Centre");
+		comboBoxRegions.addItem("Centre_(French_region)");
 		comboBoxRegions.addItem("Champagne-Ardenne");
-		comboBoxRegions.addItem("Corse");
-		comboBoxRegions.addItem("Franche-Comt�");
-		comboBoxRegions.addItem("Haute-Normandie");
+		comboBoxRegions.addItem("Corsica");
+		comboBoxRegions.addItem("Franche-Comt%C3%A9");
+		comboBoxRegions.addItem("Upper_Normandy");
 		comboBoxRegions.addItem("�le-De-France");
 		comboBoxRegions.addItem("Languedoc-Roussillon");
 		comboBoxRegions.addItem("Limousin");
 		comboBoxRegions.addItem("Lorraine");
-		comboBoxRegions.addItem("Midi-Pyr�n�es");
-		comboBoxRegions.addItem("Nord-Pas-De-Calais");
-		comboBoxRegions.addItem("Pays-De-La-Loire");
-		comboBoxRegions.addItem("Picardie");
+		comboBoxRegions.addItem("Midi-Pyr%C3%A9n%C3%A9es");
+		comboBoxRegions.addItem("Nord-Pas-de-Calais");
+		comboBoxRegions.addItem("Pays_de_la_Loire");
+		comboBoxRegions.addItem("Picardy");
 		comboBoxRegions.addItem("Poitou-Charentes");
-		comboBoxRegions.addItem("Provence-Alpes-C�te_d'Azur");
+		comboBoxRegions.addItem("Provence-Alpes-C%C3%B4te_d'Azur");
 		comboBoxRegions.addItem("Rh%C3%B4ne-Alpes");
 		panel_1.add(comboBoxRegions, gbc_comboBoxRegions);
 		
