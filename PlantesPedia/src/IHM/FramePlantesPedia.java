@@ -81,7 +81,7 @@ public class FramePlantesPedia extends JFrame {
 		panel.setLayout(gbl_panel);
 		
 		JTextArea txtrTapezVotreRecherche = new JTextArea();
-		txtrTapezVotreRecherche.setForeground(Color.LIGHT_GRAY);
+		//txtrTapezVotreRecherche.setForeground(Color.LIGHT_GRAY);
 		txtrTapezVotreRecherche.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -108,6 +108,7 @@ public class FramePlantesPedia extends JFrame {
                         String hab_max = null;
                         String sup_min = null;
                         String sup_max = null;
+                        System.out.println("J'AFFFFIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIICHE"+txtrTapezVotreRecherche.getText().length());
                         if (!txtrTapezVotreRecherche.getText().equals("Tapez votre recherche...")){
                             nom = (String) txtrTapezVotreRecherche.getText();
                         }
