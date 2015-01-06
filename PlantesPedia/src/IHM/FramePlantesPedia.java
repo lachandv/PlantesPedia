@@ -52,7 +52,6 @@ public class FramePlantesPedia extends JFrame {
 	static JLabel lblHabitants = new JLabel("< Nombre d'habitants <");
 	static JLabel lblCodePostal = new JLabel("Code Postal");
 	static JLabel lblSuperficie = new JLabel("< superficie (km\u00B2) <");
-	private JTextField textFieldDep;
 	private JTextField textFieldDepartement;
         static JLabel lblReponses = new JLabel("Villes correspondantes :");
         String[] columnNames = {"Nom de la ville"};
@@ -109,12 +108,14 @@ public class FramePlantesPedia extends JFrame {
                         String hab_max = null;
                         String sup_min = null;
                         String sup_max = null;
-                        if (!txtrTapezVotreRecherche.getText().equals("Tapez votre recherche...") &
-                                !txtrTapezVotreRecherche.getText().equals("")){
+                        if (!txtrTapezVotreRecherche.getText().equals("Tapez votre recherche...")){
                             nom = (String) txtrTapezVotreRecherche.getText();
                         }
                         if (comboBoxRegions.isEnabled()){
                             region = (String) comboBoxRegions.getSelectedItem();
+                        }
+                        if (textFieldDepartement.isEnabled()){
+                            dep = (String) textFieldDepartement.getText();
                         }
                         if (textFieldCodePostal.isEnabled()){
                             cp = (String) textFieldCodePostal.getText();
@@ -131,7 +132,7 @@ public class FramePlantesPedia extends JFrame {
                         if (textFieldSuperficieMax.isEnabled()){
                             sup_max = (String) textFieldSuperficieMax.getText();
                         }
-			String requete = model.OpenDBpedia.getRequete(null, region, null, cp, hab_min, hab_max, sup_min,sup_max);
+			String requete = model.OpenDBpedia.getRequete(nom, region, dep, cp, hab_min, hab_max, sup_min,sup_max);
                         ArrayList<String> tabVille = new ArrayList<String>();
                         try {
                                 tabVille = model.OpenDBpedia.getVilles(requete);
@@ -142,6 +143,7 @@ public class FramePlantesPedia extends JFrame {
                             } catch (QueryEvaluationException ex) {
                                 Logger.getLogger(FramePlantesPedia.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                        System.out.println(nom);
                         Iterator it = tabVille.iterator();
                         String tmp = "";
                         areaReponse.setText("");

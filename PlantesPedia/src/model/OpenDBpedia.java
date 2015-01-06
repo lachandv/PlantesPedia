@@ -18,6 +18,9 @@ public class OpenDBpedia {
     String req = "Select distinct ?ville Where{ ?ville <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/France>";
     
     int hab_min, hab_max, super_min, super_max;
+    
+    if (nom != null) req = req+Nom(nom);
+    
     if (region != null) req=req+Region(region);
     
     if (dpt != null) req=req+Departement(dpt);
@@ -95,7 +98,14 @@ public static ArrayList<String> getVilles(String requete)throws RepositoryExcept
 	
 		
 		connection.close();
+                // Commentaire bidon
 		
 	}
+
+    private static String Nom(String nom) {
+        String tmp1 = ". ?ville rdfs:label ?name . FILTER(str(?name) ='";
+        String tmp2 = "')";
+        return tmp1 + nom + tmp2;
+    }
         
 }
