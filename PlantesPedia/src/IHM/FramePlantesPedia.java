@@ -176,6 +176,9 @@ public class FramePlantesPedia extends JFrame {
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 		
 		
+		/*
+		 * ComboBox contenant les filtres a ajouter pour la recherche
+		 */
 		GridBagConstraints gbc_comboBoxTypeAjout = new GridBagConstraints();
 		gbc_comboBoxTypeAjout.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxTypeAjout.fill = GridBagConstraints.HORIZONTAL;
@@ -188,7 +191,9 @@ public class FramePlantesPedia extends JFrame {
 		comboBoxTypeAjout.addItem("Superficie");
 		panel.add(comboBoxTypeAjout, gbc_comboBoxTypeAjout);
 		
-		
+		/*
+		 * ComboBox contenant les filtres a supprimer pour la recherche
+		 */
 		GridBagConstraints gbc_comboBoxTypeSupprime = new GridBagConstraints();
 		gbc_comboBoxTypeSupprime.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxTypeSupprime.fill = GridBagConstraints.HORIZONTAL;
@@ -196,6 +201,9 @@ public class FramePlantesPedia extends JFrame {
 		gbc_comboBoxTypeSupprime.gridy = 2;
 		panel.add(comboBoxTypeSupprime, gbc_comboBoxTypeSupprime);
 		
+		/*
+		 * Bouton pour l'ajout des filtres pour la recherche
+		 */
 		JButton btnAjout = new JButton("Ajouter");
 		btnAjout.addMouseListener(new MouseAdapter() {
 			@Override
@@ -242,6 +250,9 @@ public class FramePlantesPedia extends JFrame {
 		gbc_btnAjout.gridy = 3;
 		panel.add(btnAjout, gbc_btnAjout);
 		
+		/*
+		 * Bouton pour supprimer un filtre
+		 */
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.addMouseListener(new MouseAdapter() {
 			@Override
@@ -304,7 +315,9 @@ public class FramePlantesPedia extends JFrame {
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
-		
+		/*
+		 * ComboBox contenant toutes les régions de france pour filtrer la recherche
+		 */
 		GridBagConstraints gbc_comboBoxRegions = new GridBagConstraints();
 		gbc_comboBoxRegions.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxRegions.fill = GridBagConstraints.HORIZONTAL;
@@ -335,7 +348,9 @@ public class FramePlantesPedia extends JFrame {
 		comboBoxRegions.addItem("Rh%C3%B4ne-Alpes");
 		panel_1.add(comboBoxRegions, gbc_comboBoxRegions);
 		
-		
+		/*
+		 * Label département
+		 */
 		GridBagConstraints gbc_lblDepartement = new GridBagConstraints();
 		gbc_lblDepartement.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDepartement.anchor = GridBagConstraints.EAST;
@@ -344,6 +359,9 @@ public class FramePlantesPedia extends JFrame {
 		lblDepartement.setEnabled(false);
 		panel_1.add(lblDepartement, gbc_lblDepartement);
 		
+		/*
+		 * Champ de texte pour selectionner un departement
+		 */
 		textFieldDepartement = new JTextField();
 		textFieldDepartement.setEnabled(false);
 		GridBagConstraints gbc_textFieldDepartement = new GridBagConstraints();
@@ -354,6 +372,9 @@ public class FramePlantesPedia extends JFrame {
 		panel_1.add(textFieldDepartement, gbc_textFieldDepartement);
 		textFieldDepartement.setColumns(10);
 		
+		/*
+		 * Champ de texte pour selectionner le nombre minimal d'habitant a prendre en compte pour la recherche
+		 */
 		textFieldHabitantsMin = new JTextField();
 		textFieldHabitantsMin.setEnabled(false);
 		GridBagConstraints gbc_textFieldHabitantsMin = new GridBagConstraints();
@@ -372,6 +393,9 @@ public class FramePlantesPedia extends JFrame {
 		lblHabitants.setEnabled(false);
 		panel_1.add(lblHabitants, gbc_lblHabitants);
 		
+		/*
+		 * Champ de texte pour selectionner le nombre maximal d'habitant a prendre en compte pour la recherche
+		 */
 		textFieldHabitantsMax = new JTextField();
 		textFieldHabitantsMax.setEnabled(false);
 		GridBagConstraints gbc_textFieldHabitantsMax = new GridBagConstraints();
@@ -391,6 +415,9 @@ public class FramePlantesPedia extends JFrame {
 		lblCodePostal.setEnabled(false);
 		panel_1.add(lblCodePostal, gbc_lblCodePostal);
 		
+		/*
+		 * Champ de texte pour selectionner le nombre minimal d'habitant a prendre en compte pour la recherche
+		 */
 		textFieldCodePostal = new JTextField();
 		textFieldCodePostal.setEnabled(false);
 		GridBagConstraints gbc_textFieldCodePostal = new GridBagConstraints();
@@ -401,6 +428,9 @@ public class FramePlantesPedia extends JFrame {
 		panel_1.add(textFieldCodePostal, gbc_textFieldCodePostal);
 		textFieldCodePostal.setColumns(10);
 		
+		/*
+		 * Champ de texte pour selectionner la superficie minimale pour la recherche
+		 */
 		textFieldSuperficieMin = new JTextField();
 		textFieldSuperficieMin.setEnabled(false);
 		GridBagConstraints gbc_textFieldSuperficieMin = new GridBagConstraints();
@@ -419,6 +449,10 @@ public class FramePlantesPedia extends JFrame {
 		lblSuperficie.setEnabled(false);
 		panel_1.add(lblSuperficie, gbc_lblSuperficie);
 		
+		
+		/*
+		 * Champ de texte pour selectionner la superficie maximale pour la recherche
+		 */
 		textFieldSuperficieMax = new JTextField();
 		textFieldSuperficieMax.setEnabled(false);
 		GridBagConstraints gbc_textFieldSuperficieMax = new GridBagConstraints();
@@ -428,14 +462,14 @@ public class FramePlantesPedia extends JFrame {
 		panel_1.add(textFieldSuperficieMax, gbc_textFieldSuperficieMax);
 		textFieldSuperficieMax.setColumns(10);
                 
-                GridBagConstraints gbc_lblReponse = new GridBagConstraints();
+        GridBagConstraints gbc_lblReponse = new GridBagConstraints();
 		gbc_lblReponse.insets = new Insets(0, 0, 0, 5);
 		gbc_lblReponse.gridx = 1;
 		gbc_lblReponse.gridy = 5;
 		lblReponses.setEnabled(false);
 		panel_1.add(lblReponses, gbc_lblReponse);
                 
-                GridBagConstraints gbc_tabReponse = new GridBagConstraints();
+        GridBagConstraints gbc_tabReponse = new GridBagConstraints();
 		gbc_tabReponse.insets = new Insets(0, 0, 0, 5);
 		gbc_tabReponse.gridx = 1;
 		gbc_tabReponse.gridy = 6;
@@ -444,6 +478,9 @@ public class FramePlantesPedia extends JFrame {
                 
 	}
 
+	/*
+	 * Fonction qui indique si une valeur est présente dans un tableau
+	 */
 	public void verifierDoublon(List<String> tab, String valeur) {
 		if  (tab.isEmpty() == false) {
 			for (int i=0; i<tab.size();i++) {
@@ -457,6 +494,9 @@ public class FramePlantesPedia extends JFrame {
 		}
 	}
 	
+	/*
+	 * Fonction qui affiche un tableau passé en paramètre
+	 */
 	public void afficherTableau(List<String> tab) {
 		System.out.println("Tableau :");
 		for (int i=0; i<tab.size();i++) {
@@ -464,6 +504,9 @@ public class FramePlantesPedia extends JFrame {
 		}
 	}
 	
+	/*
+	 * Fonction qui supprime un type du tableau des filtres pour la recherche
+	 */
 	public void supprimerTypeDuTableau(String temp) {
 		for (int i=0; i<tabType.size();i++) {
 			if (tabType.get(i).equals(temp)) {
@@ -475,10 +518,16 @@ public class FramePlantesPedia extends JFrame {
 		}
 	}
 	
+	/*
+	 * Fonction qui mets les filtres dans la comboBox des types
+	 */
 	public void mettreTypeDansComboBox(String temp) {
 		comboBoxTypeSupprime.addItem(temp);
 	}
 	
+	/*
+	 * Fonction qui verifie si un tableau contient un string passé en paramètre
+	 */
 	public boolean verifierExiste(String temp) {
 		if (tabType.contains(temp)) {
 			return true;
